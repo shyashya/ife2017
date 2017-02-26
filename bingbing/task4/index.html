@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>队列</title>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div class="container">
+        <div id="team" class="items-all">
+            
+        </div>
+        <div id="input_num" class="input-num">
+            <div class="btn-default" id="left_out">左侧出</div>
+            <div class="btn-default" id="left_in">左侧入</div>
+            <div class="input-default"><input type="number" id="input_number"/></div>
+            <div class="btn-default" id="right_in">右侧入</div>
+            <div class="btn-default" id="right_out">右侧出</div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+
+    var data = [];
+
+    //更新显示的队列的值
+    function updateTeam(array) {
+        var team = document.getElementById("team");
+        var html = "";
+        for (var i = 0; i < array.length ; i++) {
+            html += ("<div class='btn-default'>" + array[i] + "</div>");
+        }
+        team.innerHTML = html;
+    }
+
+    //左侧入事件
+    function leftIn() {
+        var a = document.getElementById("input_number").value;
+        data.unshift(a);
+        updateTeam(data);
+    }
+
+    //左侧出事件
+    function leftOut() {
+        var del = data.shift();
+        updateTeam(data);
+        alert(del);
+    }
+
+    //右侧入事件
+    function rightIn() {
+        var a = document.getElementById("input_number").value;
+        data.push(a);
+        updateTeam(data);
+    }
+
+    //右侧出事件
+    function rightOut() {
+        var del = data.pop();
+        updateTeam(data);
+        alert(del);
+    }
+    //初始化
+    function init() {
+        document.getElementById("left_in").onclick = function () { leftIn() };
+        document.getElementById("left_out").onclick = function () { leftOut ()};
+        document.getElementById("right_in").onclick = function () { rightIn ()};
+        document.getElementById("right_out").onclick = function () { rightOut() };
+    }
+    init();
+</script>
