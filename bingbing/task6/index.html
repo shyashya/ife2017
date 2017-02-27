@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>队列</title>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div class="container">
+        <div id="team" class="items-all">
+            
+        </div>
+        <div id="input_num" class="input-num">
+            <div class="btn-default" id="left_out">左侧出</div>
+            <div class="btn-default" id="left_in">左侧入</div>
+            <div class="input-default">
+               <textarea type id="input_number" rows="2"></textarea>
+             </div>
+            <div class="btn-default" id="right_in">右侧入</div>
+            <div class="btn-default" id="right_out">右侧出</div>
+            <div class="input-default">
+                <input type="text" id="query" />
+            </div>
+            <div class="btn-default" id="query_btn">查询</div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+
+    var data = ["dsad","fsd","1232"];
+
+    //更新显示的队列的值
+    function updateTeam(array) {
+        var team = document.getElementById("team");
+        var html = "";
+        for (var i = 0; i < array.length ; i++) {
+            html += ("<div class='btn-default'>" + array[i] + "</div>");
+        }
+        team.innerHTML = html;
+    }
+
+    //获取textare的值并转化成arry
+    function getArray() {
+        var a = document.getElementById("input_number").value;
+        var pattern = /\n|,|、|\s|，|　/;
+        return a.split(pattern);
+    }
+
+    //左侧入事件
+    function leftIn() {
+        var array = getArray();
+        //var a = document.getElementById("input_number").value;
+        array.forEach(function (a) {
+            if (a != "") {
+                data.unshift(a);
+            }
+        });
+        updateTeam(data);
+    }
+
+    //左侧出事件
+    function leftOut() {
+        var del = data.shift();
+        updateTeam(data);
+        alert(del);
+    }
+
+    //右侧入事件
+    function rightIn() {
+
+        var array = getArray();
+        //var a = document.getElementById("input_number").value;
+        array.forEach(function (a) {
+            if (a != "") {
+                data.push(a);
+            }
+        });
+        updateTeam(data);
+    }
+
+    //右侧出事件
+    function rightOut() {
+        var del = data.pop();
+        updateTeam(data);
+        alert(del);
+    }
+
+    //查询事件
+    function query(w) {
+        var a = document.getElementById("query").value;
+        var pattern = "/" + a + "+/g";
+        var team = document.getElementById("team");
+        var html = "";
+        for (var i = 0; i < data.length ; i++) {
+            var m = data[i].split(a);
+            var inhtml = "";
+            for (var j = 0; j < m.length - 1; j++) {
+                inhtml += (m[j] + "<span class='match-item'>" + a + "</span>");
+            }
+            inhtml += m[m.length - 1];
+            html += ("<div class='btn-default'>" + inhtml + "</div>");
+        }
+        team.innerHTML = html;
+    }
+
+    //初始化
+    function init() {
+        updateTeam(data)
+        document.getElementById("left_in").onclick = function () { leftIn() };
+        document.getElementById("left_out").onclick = function () { leftOut ()};
+        document.getElementById("right_in").onclick = function () { rightIn ()};
+        document.getElementById("right_out").onclick = function () { rightOut() };
+        document.getElementById("query_btn").onclick = function () { query() };
+    }
+    init();
+</script>
