@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿body
 {
     margin:0;
@@ -44,4 +45,52 @@
 }
 hr{
     margin-top:0;
+=======
+﻿body
+{
+    margin:0;
+    padding:0;
+}
+.container{
+    margin:10% auto;
+}
+.items-all,.input-num{
+    padding:0 10px 0 10px;
+    text-align:center;
+}
+.items-all{
+    height:100px;
+}
+.items-list{
+    display:inline-block;
+    border:1px solid #ff6a00;
+    background-color:#ff6a00;
+    width:10px;
+    margin-left:2px;
+    margin-right:2px;
+}
+.items-list:hover{
+    cursor:pointer;
+    transform:scale(1.2);
+}
+
+.btn-default{
+    display:inline-block;
+    width:50px;
+    padding:10px;
+    border:1px solid #ff6a00;
+    background-color:#ff6a00;
+    color:white;
+    font-weight:bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius:3px;
+    margin:10px 10px;
+    cursor:pointer;
+}
+.input-default{
+    display:inline-block;
+}
+hr{
+    margin-top:0;
+>>>>>>> 4176a3a50deb2793caac7878bee4bba65b780208
 }
