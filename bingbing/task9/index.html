@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .container {
+            display: flex;
+            width: 80%;
+            height: 250px;
+            margin: 0 auto;
+            padding: 2%;
+            overflow:auto;
+        }
+
+            .container div {
+                display: inline-flex;
+                width: 40%;
+                height: 80%;
+                margin: auto 5%;
+                overflow:auto;
+            }
+
+        div {
+            border: 1px solid #ff6a00;
+            background-color: white;
+        }
+
+        .btn-container {
+            margin: 20px auto;
+            border: none;
+            width: 80%;
+            height: 50px;
+            text-align: center;
+        }
+
+           #contain, .btn-container div {
+                border: none;
+            }
+
+        .btn-default {
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ff6a00;
+            background-color: #ff6a00;
+            color: white;
+            font-weight: bold;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border-radius: 3px;
+            margin: 10px 10px;
+            cursor: pointer;
+        }
+
+        .input-default {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="contain">
+        <div class="container" id="root">
+            0
+            <div>
+                1
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <div>
+                2
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+                <div>10</div>
+            </div>
+            <div>
+                3
+                <div>11</div>
+                <div>12</div>
+            </div>
+        </div>
+        </div>
+    <div class="btn-container">
+        <div id="preView" class="btn-default">前序</div>
+        <!--<div class="btn-default" id="afterView">后序</div>-->
+        <div class="input-default">
+            <input type="text" id="query" />
+        </div>
+        <div class="btn-default" id="query_btn">查询</div>
+    </div>
+    <div class="btn-container">
+        <div class="btn-default" id="delete_btn">删除</div>
+        <div class="input-default">
+            <input type="text" id="add" />
+        </div>
+        <div class="btn-default" id="add_btn">增加</div>
+    </div>
+</body>
+</html>
+<script>
+    var root = document.getElementById("root");
+    var contain = document.getElementById("contain");
+    var array = [];
+    var flag = 0;
+    var last;
+    var find = 0;
+
+    //删除事件
+    function delele() {
+        var div = contain.getElementsByTagName("div")
+        for (var i = 0; i < div.length; i++) {
+            if (div[i].style.background == "rgb(64, 185, 164)") {
+                div[i].parentNode.removeChild(div[i]);
+            }
+        }
+    }
+
+    //增加事件
+    function add() {
+        var div = contain.getElementsByTagName("div")
+        var text = document.getElementById("add").value;
+        var innerDiv = document.createElement("div");
+        innerDiv.innerText = text;
+        for (var i = 0; i < div.length; i++) {
+            if (div[i].style.background == "rgb(64, 185, 164)") {
+                div[i].appendChild(innerDiv);
+            }
+        }
+    }
+
+    //查询遍历
+    function query(node,a) {
+        if (node) {
+            array.push(node);
+            var m = node.firstChild.textContent.replace(/(\n)+|(\r\n)+|(\s)+/g, "");
+            if (m == a) {
+                    array.push(node);
+                    find = array.length;
+            } else {
+                    array.push(node);
+                    for (var i = 0; i < node.children.length; i++) {
+                     query(node.children[i], a);
+                }
+            }
+        }
+    }
+
+    //先序遍历
+    function preView(node) {
+        if (node) {
+            array.push(node);
+            for (var i = 0; i < node.children.length; i++) {
+                preView(node.children[i]);
+            }
+        }
+    }
+
+    //后序遍历
+    function afterView(node) {
+        if (node) {
+            for (var i = 0; i < node.children.length; i++) {
+                afterView(node.children[i]);
+            }
+            array.push(node);
+        }
+    }
+
+    //显示过程
+    function animate() {
+
+        for(var i=0; i<array.length; i++){
+            setTimeout(function(i){
+                    return function(){
+                            if(i == array.length-1){
+                                    flag = 0;
+                                }
+                            if (last) {
+                                if (find == i && find != 0) {
+                                    array[find - 1].style.background = "#40b9a4";
+                                } else {
+                                    last.style.background = "white";
+                                }
+                            }
+                            if ((find - 1) == i && find != 0) {
+                                array[find - 1].style.background = "#40b9a4";
+                            } else {
+                                array[i].style.background = "#ff6a00";
+                            }
+                            last = array[i];
+                    }
+                }(i),i*500)
+        }
+    }
+
+    //初始化
+    function init() {
+        document.getElementById("preView").onclick = function () {
+            if (!flag) {
+                flag = 1;
+                array = [];
+                if(last){
+                last.style.background = "white";
+            }
+                preView(root);
+                animate();
+            }
+        }
+        
+        //查找采用前序遍历
+        document.getElementById("query_btn").onclick = function () {
+            var b = 0;
+            var a = document.getElementById("query").value;
+            if (!flag) {
+                flag = 1;
+                array = [];
+                find = 0;
+                if (last) {
+                    last.style.background = "white";
+                }
+                query(root,a);
+                animate();
+                if (find == 0) {
+                    alert("未找到该元素");
+                }
+            }
+        }
+
+        document.getElementById("delete_btn").onclick = function () {
+            delele();
+        }
+        document.getElementById("add_btn").onclick = function () {
+            add();
+        }
+
+        selectitem();
+    }
+    init();
+
+
+    //页面点击选中事件
+    function selectitem() {
+        var div = contain.getElementsByTagName("div");
+        for (var i = 0; i < div.length; i++) {
+            div[i].onclick = function (event) {
+                //event.preventDefault()
+                this.style.background = "#40b9a4";
+                //event.preventDefault();
+                event.stopPropagation();
+            }
+        }
+    }
+</script>
