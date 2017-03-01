@@ -7,7 +7,7 @@
     <script src="../js/echarts.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="container" style="width:600px;height:400px;margin:0 auto;"></div>
+    <div id="container" style="width:80%;height:400px;margin:0 10%;"></div>
 </body>
 </html>
 <script>
@@ -18,21 +18,41 @@
             text: ''
         },
         tooltip: {},
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
         legend: {
-            data: ['每日心情指数']
+            data: ['心情预测指数', '心情实际指数', '影响生活指数']
         },
         xAxis: {
             data: ["周一", "周二", "周三", "周四", "周五", "周六","周日"]
         },
         yAxis: {},
         series: [{
-            name: '每日心情指数',
+            name: '心情预测指数',
             type: 'line',
             data: [20, 22, 40, 20, 30, 35,64]
         }, {
-            name: '每日心情指数',
+            name: '心情实际指数',
             type: 'bar',
             data: [5, 20, 36, 10, 10, 20,50]
+        }, {
+            name: '影响生活指数',
+            type: 'bar',
+            data: [2, 10, 30, 5, 5, 10, 40],
+            itemStyle: {
+                normal: {
+                    // 设置颜色
+                    color: '#40b9a4',
+                    shadowBlur: 3,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
         }],
         itemStyle: {
             normal: {
