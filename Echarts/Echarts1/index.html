@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/echarts.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="container" style="width:80%;height:400px;margin:0 10%;"></div>
+</body>
+</html>
+<script>
+    var myEcharts = echarts.init(document.getElementById("container"));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: ''
+        },
+        tooltip: {},
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        legend: {
+            data: ['心情预测指数', '心情实际指数', '影响生活指数']
+        },
+        xAxis: {
+            data: ["周一", "周二", "周三", "周四", "周五", "周六","周日"]
+        },
+        yAxis: {},
+        series: [{
+            name: '心情预测指数',
+            type: 'line',
+            data: [20, 22, 40, 20, 30, 35,64]
+        }, {
+            name: '心情实际指数',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20,50]
+        }, {
+            name: '影响生活指数',
+            type: 'bar',
+            data: [2, 10, 30, 5, 5, 10, 40],
+            itemStyle: {
+                normal: {
+                    // 设置颜色
+                    color: '#40b9a4',
+                    shadowBlur: 3,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }],
+        itemStyle: {
+            normal: {
+                // 设置颜色
+                color: '#ff6a00',
+                shadowBlur: 3,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    };
+    myEcharts.setOption(option);
+</script>
