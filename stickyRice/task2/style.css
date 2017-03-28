@@ -1,0 +1,31 @@
+﻿body
+{
+    margin:0;
+    padding:0;
+}
+
+.container{
+    margin:10% auto;
+    width:80%;
+    height:60px;
+    line-height:60px;
+    border:1px solid #bfb4b4;
+    background:#cbc6c6;
+    border-radius:5px;
+    text-align:center;
+    color:whitesmoke;
+    font-size:20px;
+}
+
+.menu-tab{
+    border:1px solid #808080;
+    background:white;
+    width:200px;
+    position:absolute;
+    display:none;
+    border-radius:5px;
+}
+.menu-tab li:hover{
+    cursor:pointer;
+    color:#ff6a00;
+}
