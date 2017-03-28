@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>自定义网页右键菜单</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+<body>
+    <div class="container">
+        <div oncontextmenu ="menu(event)">右键点击显示菜单</div>
+       
+    </div>
+    <div class="menu-tab" id="menuList">
+        <ul>
+            <li>子菜单一yiyiyiyiy</li>
+            <li>子菜单二erererere</li>
+            <li>子菜单三sansansna</li>
+        </ul>
+    </div>
+    <script>
+       
+        var model = document.getElementById('menuList');
+
+        window.oncontextmenu = function () {
+            return false;
+        }
+        function menu(event) {
+            for (var i = 0; i < model.querySelectorAll('li').length; i++) {
+                model.querySelectorAll('li')[i].onclick = function () {
+                    alert(this.innerHTML);
+                }
+            }
+            var winwidth = window.innerWidth;
+            var winHeight = window.innerHeight;
+            var X = event.pageX;
+            var Y = event.pageY;
+            if (winwidth - X > 200) {
+                model.style.left = X + 'px';
+                model.style.display = 'block';
+                if (winHeight - Y > 200) {
+                    model.style.top = Y + 'px';
+                } else {
+                    model.style.top = (Y-200) + 'px';
+                }
+            } else {
+                model.style.left = (X-200) + 'px';
+                model.style.display = 'block';
+                if (winHeight - Y > 200) {
+                    model.style.top = Y + 'px';
+                } else {
+                    model.style.top = (Y - 200) + 'px';
+                }
+            }
+        }
+
+        document.addEventListener("click", function (e) { //点击其他地方菜单消失，可恢复默认的菜单事件
+            model.style.display = 'none';
+        })
+    </script>
+</body>
+</html>
