@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8"/>
 	<title>自定义radio,checkbox样式</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
 <div class="contanier">
+
+    <p>伪类元素实现</p>
 	<div>
-		<p>伪类元素实现</p>
 		<input class="check" type="checkbox" name="checkbox" id="checkbox1"/>
 		<label for="checkbox1"></label>
+        <br/>
 
-		<input type="radio" name="radio" id="radio1"/>
+		<input type="radio" name="radio" id="radio1" class="rad"/>
         <label for="radio1"></label>
-        <input type="radio" name="radio" id="radio2"/>
+        <br/>
+        <input type="radio" name="radio" id="radio2" class="rad"/>
         <label for="radio2"></label>
 	</div>
 </div>

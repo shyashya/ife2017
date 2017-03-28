@@ -1,0 +1,52 @@
+﻿body
+{
+    margin:0;
+    padding:0;
+}
+
+.contanier{
+    margin:10% auto;
+    text-align:center;
+}
+
+input{
+  display: none;
+}
+
+.check+label,.rad+label{
+    margin:auto;
+    width:14px;
+    height: 14px;
+    border:1px solid #d9d9d9;
+    display:block;
+}
+.rad+label{
+    border-radius:50%;
+}
+.check:checked+label,.rad:checked+label{
+    margin:auto;
+    border:1px solid #d73d32;
+    font-weight: 700;
+}
+
+.check:checked+label::after{
+    margin:auto;
+    display:block;
+    content:"\2714";
+    color: red;
+    line-height: 14px;
+    text-align: center;
+    font-size:10px;
+}
+
+.rad:checked+label::after{
+    margin:4px auto;
+    display:block;
+    content:" ";
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    line-height:14px;
+    background: red;
+    text-align: center;
+}
